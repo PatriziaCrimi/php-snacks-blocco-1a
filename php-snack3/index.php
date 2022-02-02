@@ -11,9 +11,13 @@
   $numbers_array = [];
   $min = 0;
   $max = 5000;
+  $sum = 0;
+
+  // Sum calculation
   for ($i=0; $i < $numbers_quantity; $i++) {
     $random_number = rand($min, $max);
     $numbers_array[] = $random_number;
+    $sum = $sum + $random_number;
   }
 ?>
 <!DOCTYPE html>
@@ -48,9 +52,15 @@
               The five numbers randomly generated are:
               <?php
                 for ($i=0; $i < count($numbers_array); $i++) {
-                  echo $numbers_array[$i];
-                }
               ?>
+              <ul>
+                <li>
+                <?php
+                  echo number_format($numbers_array[$i], 0, ",", ".");
+                }
+                ?>
+                </li>
+              </ul>
             </p>
           </div>
         </div>
@@ -58,19 +68,14 @@
           <!-- Results -->
           <div id="results">
             <h3>Results</h3>
-            <div class="message">
-              <p>
-                MESSAGE HERE
-              </p>
-            </div>
             <div class="results-box">
               <p>
+                The sum of these numbers is:
                 <span>
-                  RESULTS BOX:
+                  <?php
+                  echo number_format($sum, 0, ",", ".");
+                  ?>
                 </span>
-                <?php
-                  echo 'CONTENT HERE';
-                ?>
               </p>
             </div>
           </div>
