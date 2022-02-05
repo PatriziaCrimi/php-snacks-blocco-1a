@@ -14,10 +14,13 @@
   $is_thousand = false;
 
   // Power calculation
+
+  //***** SOLUTION 1 - FOR LOOP *****
+  /*
   for ($i=0; $is_thousand == false ; $i++) {
     $power_exponent = $i;
     $current_power_result = pow($power_base, $power_exponent);
-    if($current_power_result < 1000) {
+    if($current_power_result < $power_limit) {
       // Lower than 1000 it is added to the list
       $all_power_results[] = $current_power_result;
     } else {
@@ -25,6 +28,33 @@
       $is_thousand = true;
     }
   }
+  */
+  /*
+  //***** SOLUTION 2 - WHILE LOOP *****
+  $power_exponent = 0;
+  while ($is_thousand == false) {
+    $current_power_result = pow($power_base, $power_exponent);
+    if($current_power_result < $power_limit) {
+      // Lower than 1000 it is added to the list
+      $all_power_results[] = $current_power_result;
+    } else {
+      // Higher than 1000 stops the loop
+      $is_thousand = true;
+    }
+    $power_exponent++;
+  }
+  */
+  //***** SOLUTION 3 - DO/WHILE LOOP *****
+  $power_exponent = 0;
+  do {
+    $current_power_result = pow($power_base, $power_exponent);
+    if($current_power_result < $power_limit) {
+      // Lower than 1000 it is added to the list
+      $all_power_results[] = $current_power_result;
+    }
+    $power_exponent++;
+  }
+  while ($current_power_result < $power_limit);
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -78,7 +108,11 @@
             </div>
             <div class="results-box">
               <p>
-                The list of all its power results is:
+                The list of all the power results below
+                <?php
+                echo number_format($power_limit, 0, ",", ".");
+                ?>
+                is:
                 <ul>
                   <?php
                   for ($i=0; $i < count($all_power_results); $i++) {
